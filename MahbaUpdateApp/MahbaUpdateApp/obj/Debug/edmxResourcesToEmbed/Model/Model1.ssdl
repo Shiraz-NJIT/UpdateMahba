@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="NjitModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="ProgramSetting">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ShowBackupFormOnExit" Type="bit" Nullable="false" />
+    <Property Name="ExpiryDate" Type="nvarchar(max)" />
+    <Property Name="LastRunDate" Type="nvarchar(max)" />
+    <Property Name="AppUpdatePathExe" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="Code" />
+    </Key>
+    <Property Name="Code" Type="int" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="FullName" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="NikName" Type="nvarchar" MaxLength="250" />
+    <Property Name="LastLogin" Type="datetime" />
+    <Property Name="RoleCode" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="StateCode" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Visible" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="isLogin" Type="bit" Nullable="false" />
+    <Property Name="isGuest" Type="bit" Nullable="false" />
+    <Property Name="Expire" Type="datetime2" Precision="7" />
+    <Property Name="IPAddress" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="VersionClient">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="userId" Type="int" Nullable="false" />
+    <Property Name="MashinPath" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ClientIP" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="VesionApp">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Version" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_VersionClient_User">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="VersionClient" Type="Self.VersionClient" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Code" />
+      </Principal>
+      <Dependent Role="VersionClient">
+        <PropertyRef Name="userId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="NjitModelStoreContainer">
+    <EntitySet Name="ProgramSetting" EntityType="Self.ProgramSetting" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="VersionClient" EntityType="Self.VersionClient" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="VesionApp" EntityType="Self.VesionApp" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_VersionClient_User" Association="Self.FK_VersionClient_User">
+      <End Role="User" EntitySet="User" />
+      <End Role="VersionClient" EntitySet="VersionClient" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

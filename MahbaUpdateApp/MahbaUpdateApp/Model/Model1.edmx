@@ -1,0 +1,223 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="NjitModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ProgramSetting">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ShowBackupFormOnExit" Type="bit" Nullable="false" />
+          <Property Name="ExpiryDate" Type="nvarchar(max)" />
+          <Property Name="LastRunDate" Type="nvarchar(max)" />
+          <Property Name="AppUpdatePathExe" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Name="Code" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="FullName" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="NikName" Type="nvarchar" MaxLength="250" />
+          <Property Name="LastLogin" Type="datetime" />
+          <Property Name="RoleCode" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="StateCode" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Visible" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="isLogin" Type="bit" Nullable="false" />
+          <Property Name="isGuest" Type="bit" Nullable="false" />
+          <Property Name="Expire" Type="datetime2" Precision="7" />
+          <Property Name="IPAddress" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="VersionClient">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="userId" Type="int" Nullable="false" />
+          <Property Name="MashinPath" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ClientIP" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="VesionApp">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Version" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_VersionClient_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="VersionClient" Type="Self.VersionClient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Code" />
+            </Principal>
+            <Dependent Role="VersionClient">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="NjitModelStoreContainer">
+          <EntitySet Name="ProgramSetting" EntityType="Self.ProgramSetting" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VersionClient" EntityType="Self.VersionClient" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VesionApp" EntityType="Self.VesionApp" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_VersionClient_User" Association="Self.FK_VersionClient_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="VersionClient" EntitySet="VersionClient" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="NjitModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="NjitEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ProgramSettings" EntityType="NjitModel.ProgramSetting" />
+          <EntitySet Name="Users" EntityType="NjitModel.User" />
+          <EntitySet Name="VersionClients" EntityType="NjitModel.VersionClient" />
+          <EntitySet Name="VesionApps" EntityType="NjitModel.VesionApp" />
+          <AssociationSet Name="FK_VersionClient_User" Association="NjitModel.FK_VersionClient_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="VersionClient" EntitySet="VersionClients" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="ProgramSetting">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ShowBackupFormOnExit" Type="Boolean" Nullable="false" />
+          <Property Name="ExpiryDate" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LastRunDate" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AppUpdatePathExe" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Name="Code" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FullName" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="NikName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="LastLogin" Type="DateTime" Precision="3" />
+          <Property Name="RoleCode" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="StateCode" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Visible" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="isLogin" Type="Boolean" Nullable="false" />
+          <Property Name="isGuest" Type="Boolean" Nullable="false" />
+          <Property Name="Expire" Type="DateTime" Precision="7" />
+          <Property Name="IPAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="VersionClients" Relationship="NjitModel.FK_VersionClient_User" FromRole="User" ToRole="VersionClient" />
+        </EntityType>
+        <EntityType Name="VersionClient">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userId" Type="Int32" Nullable="false" />
+          <Property Name="MashinPath" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ClientIP" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="User" Relationship="NjitModel.FK_VersionClient_User" FromRole="VersionClient" ToRole="User" />
+        </EntityType>
+        <EntityType Name="VesionApp">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Version" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="FK_VersionClient_User">
+          <End Type="NjitModel.User" Role="User" Multiplicity="1" />
+          <End Type="NjitModel.VersionClient" Role="VersionClient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Code" />
+            </Principal>
+            <Dependent Role="VersionClient">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="NjitModelStoreContainer" CdmEntityContainer="NjitEntities">
+          <EntitySetMapping Name="ProgramSettings">
+            <EntityTypeMapping TypeName="NjitModel.ProgramSetting">
+              <MappingFragment StoreEntitySet="ProgramSetting">
+                <ScalarProperty Name="AppUpdatePathExe" ColumnName="AppUpdatePathExe" />
+                <ScalarProperty Name="LastRunDate" ColumnName="LastRunDate" />
+                <ScalarProperty Name="ExpiryDate" ColumnName="ExpiryDate" />
+                <ScalarProperty Name="ShowBackupFormOnExit" ColumnName="ShowBackupFormOnExit" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="NjitModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="IPAddress" ColumnName="IPAddress" />
+                <ScalarProperty Name="Expire" ColumnName="Expire" />
+                <ScalarProperty Name="isGuest" ColumnName="isGuest" />
+                <ScalarProperty Name="isLogin" ColumnName="isLogin" />
+                <ScalarProperty Name="Visible" ColumnName="Visible" />
+                <ScalarProperty Name="StateCode" ColumnName="StateCode" />
+                <ScalarProperty Name="RoleCode" ColumnName="RoleCode" />
+                <ScalarProperty Name="LastLogin" ColumnName="LastLogin" />
+                <ScalarProperty Name="NikName" ColumnName="NikName" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VersionClients">
+            <EntityTypeMapping TypeName="NjitModel.VersionClient">
+              <MappingFragment StoreEntitySet="VersionClient">
+                <ScalarProperty Name="ClientIP" ColumnName="ClientIP" />
+                <ScalarProperty Name="MashinPath" ColumnName="MashinPath" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VesionApps">
+            <EntityTypeMapping TypeName="NjitModel.VesionApp">
+              <MappingFragment StoreEntitySet="VesionApp">
+                <ScalarProperty Name="Version" ColumnName="Version" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

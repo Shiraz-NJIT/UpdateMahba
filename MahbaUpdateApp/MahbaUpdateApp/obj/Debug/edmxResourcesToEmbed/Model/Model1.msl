@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="NjitModelStoreContainer" CdmEntityContainer="NjitEntities">
+    <EntitySetMapping Name="ProgramSettings">
+      <EntityTypeMapping TypeName="NjitModel.ProgramSetting">
+        <MappingFragment StoreEntitySet="ProgramSetting">
+          <ScalarProperty Name="AppUpdatePathExe" ColumnName="AppUpdatePathExe" />
+          <ScalarProperty Name="LastRunDate" ColumnName="LastRunDate" />
+          <ScalarProperty Name="ExpiryDate" ColumnName="ExpiryDate" />
+          <ScalarProperty Name="ShowBackupFormOnExit" ColumnName="ShowBackupFormOnExit" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="NjitModel.User">
+        <MappingFragment StoreEntitySet="User">
+          <ScalarProperty Name="IPAddress" ColumnName="IPAddress" />
+          <ScalarProperty Name="Expire" ColumnName="Expire" />
+          <ScalarProperty Name="isGuest" ColumnName="isGuest" />
+          <ScalarProperty Name="isLogin" ColumnName="isLogin" />
+          <ScalarProperty Name="Visible" ColumnName="Visible" />
+          <ScalarProperty Name="StateCode" ColumnName="StateCode" />
+          <ScalarProperty Name="RoleCode" ColumnName="RoleCode" />
+          <ScalarProperty Name="LastLogin" ColumnName="LastLogin" />
+          <ScalarProperty Name="NikName" ColumnName="NikName" />
+          <ScalarProperty Name="FullName" ColumnName="FullName" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VersionClients">
+      <EntityTypeMapping TypeName="NjitModel.VersionClient">
+        <MappingFragment StoreEntitySet="VersionClient">
+          <ScalarProperty Name="ClientIP" ColumnName="ClientIP" />
+          <ScalarProperty Name="MashinPath" ColumnName="MashinPath" />
+          <ScalarProperty Name="userId" ColumnName="userId" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VesionApps">
+      <EntityTypeMapping TypeName="NjitModel.VesionApp">
+        <MappingFragment StoreEntitySet="VesionApp">
+          <ScalarProperty Name="Version" ColumnName="Version" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
